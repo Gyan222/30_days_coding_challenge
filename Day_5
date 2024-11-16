@@ -1,0 +1,21 @@
+Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+
+solution:
+
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        dict={}
+        for i in range(0,n+1):
+            dict[i]= 'False'
+
+        for num in nums:
+            dict[num]='True'
+
+        for key in dict:
+            if dict[key] == 'False':
+                return key
