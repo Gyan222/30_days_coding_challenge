@@ -1,0 +1,21 @@
+Given an integer array arr[] of size n, find the maximum of the minimums for every window size in the given array. The window size varies from 1 to n.
+
+
+Solution:
+
+def max_of_mins(arr):
+    n = len(arr)
+    res = [0] * n
+    for k in range(1, n + 1):
+        max_of_min = float('-inf')
+        for i in range(n - k + 1):
+            min_val = arr[i]
+            for j in range(1, k):
+                min_val = min(min_val, arr[i + j])
+            max_of_min = max(max_of_min, min_val)
+        res[k - 1] = max_of_min
+
+    return res
+arr = [10, 20, 30, 50, 10, 70, 30]
+res = max_of_mins(arr)
+print(res)
