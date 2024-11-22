@@ -1,0 +1,57 @@
+Given two strings S (length m) and P (length n), the task is to find the smallest substring in S that contains all characters of P, including duplicates. If no such substring exists, return “-1”. If multiple substrings of the same length are found, return the one with the smallest starting index.
+
+
+solution:
+def contains_all_characters(s, p):
+    count = [0] * 256
+
+    # Count the frequency of each character
+    # in the pattern
+    for ch in p:
+        count[ord(ch)] += 1
+
+    # For each character in the substring,
+    # decrement its count
+    for ch in s:
+        if count[ord(ch)] > 0:
+            count[ord(ch)] -= 1
+
+    # If all counts in the count array are zero,
+    # substring contains all characters of the pattern
+    return all(c == 0 for c in count)
+
+def find_smallest_substring(s, p):
+    m = len(s)
+    n = len(p)
+    smallest_substring = ""
+    min_len = float('inf')
+
+    # Generate all substrings of the given string
+    for i in range(m):
+        for j in range(i, m):
+            substr = s[i:j + 1]
+
+            # Check if the substring contains all
+            # characters of the pattern
+            if contains_all_characters(substr, p):
+                curr_len = len(substr)
+
+                # Update the smallest_substring if the
+                # current substring is smaller
+                if curr_len < min_len:
+                    min_len = curr_len
+                    smallest_substring = substr
+
+    return smallest_substring
+
+
+if _name_ == "_main_":
+    s = "timetopractice"
+    p = "toc"
+
+    result = find_smallest_substring(s, p)
+
+    if result:
+        print(result)
+    else:
+        print(-1)
