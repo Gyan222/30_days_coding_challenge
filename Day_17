@@ -1,0 +1,46 @@
+Given a matrix mat[][] of size m x n, the task is to print all elements of the matrix in spiral form.                                        solution:   # Python program to perform spiral order 
+
+def spiralOrder(matrix):
+    m = len(mat)
+    n = len(mat[0])
+    result = []
+    if m == 0:
+        return result
+    vis = [[False] * n for _ in range(m)]
+    dr = [0, 1, 0, -1]
+
+    
+    dc = [1, 0, -1, 0]
+    r, c = 0, 0
+
+    
+    di = 0
+
+    
+    for i in range(m * n):
+
+        
+        result.append(mat[r][c])
+
+
+        vis[r][c] = True
+
+        
+        newR, newC = r + dr[di], c + dc[di]
+        if 0 <= newR < m and 0 <= newC < n and not vis[newR][newC]:
+            r, c = newR, newC
+        else:
+            di = (di + 1) % 4
+            r += dr[di]
+            c += dc[di]
+    return result
+
+if __name__ == "__main__":
+ mat = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 16]
+    ]
+    result = spiralOrder(mat)
+    print(result)
