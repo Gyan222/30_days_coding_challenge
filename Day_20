@@ -1,0 +1,12 @@
+You are given an array of integers arr[]. Your task is to reverse the given array                                                              solution:   class Solution:
+    def reverseArray(self, arr):
+        n=len(arr)
+        l=int(n/2)
+        
+        if n==1:
+            return arr
+            
+        for i in range(0,l):
+            (arr[i], arr[n-1-i]) = (arr[n-1-i], arr[i])
+            
+        return arr
